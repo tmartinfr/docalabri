@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from django.views.generic.base import TemplateView
+from django.contrib.auth import views as auth_views
 
 from papierbackup.views import IndexView
+from papierbackup.forms import CustomAuthenticationForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', IndexView.as_view(), name='index'),
+    url(r'^login', auth_views.login, {'authentication_form': CustomAuthenticationForm}, name='login'),
 ]
