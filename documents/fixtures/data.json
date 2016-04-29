@@ -1,0 +1,1 @@
+[{"model": "documents.document", "pk": 1, "fields": {"name": "Carte d'identit\u00e9", "user": 1, "expiration_date": "2018-04-12", "creation_date": "2016-04-29T05:11:29.541Z", "modification_date": "2016-04-29T05:11:29.541Z"}}, {"model": "documents.file", "pk": 1, "fields": {"document": 1, "file": "documents/user_1/cni.jpg", "creation_date": "2016-04-29T05:11:29.543Z"}}]
