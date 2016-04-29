@@ -22,15 +22,18 @@
                 <a class="navbar-brand" href="{% url "index" %}">Papier Backup</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
-                <form class="navbar-form navbar-right">
+                {%  if auth_form %}
+                <form class="navbar-form navbar-right" action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
                     <div class="form-group">
-                        <input type="text" placeholder="Email" class="form-control">
+                        {{ auth_form.username }}
                     </div>
                     <div class="form-group">
-                        <input type="password" placeholder="Password" class="form-control">
+                        {{ auth_form.password }}
                     </div>
                     <button type="submit" class="btn btn-success">Sign in</button>
                 </form>
+                {%  endif %}
             </div><!--/.navbar-collapse -->
         </div>
     </nav>
