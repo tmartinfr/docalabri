@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if document_list %}
+        {% for document in document_list %}
+        <ul>
+            {{ document.name }}
+        </ul>
+        {% endfor %}
+    {% else %}
+        Aucun document.
+    {% endif %}
+{% endblock %}

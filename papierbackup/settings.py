@@ -124,6 +124,10 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/documents/'
 
+
+# Login process
+LOGIN_REDIRECT_URL = '/documents/'
+
 try:
     from local_settings import *
 except ImportError:
