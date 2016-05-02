@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <h2>Mes documents</h2>
     {% if document_list %}
         <div class="list-group">
             {% for document in document_list %}
@@ -14,7 +15,4 @@
     {% else %}
         Aucun document.
     {% endif %}
-
-
-
 {% endblock %}
