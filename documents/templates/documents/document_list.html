@@ -7,8 +7,10 @@
         <div class="list-group">
             {% for document in document_list %}
                 <a href="{% url 'document-detail' document.id %}" class="list-group-item">
-                    <h4 class="list-group-item-heading">{{  document.name }}</h4>
-                    <p class="list-group-item-text">Expiration : {{ document.expiration_date|date:'d/m/Y' }}</p>
+                    <h4 class="list-group-item-heading">{{ document.name }}</h4>
+                    {% if document.expiration_date %}
+                        <p class="list-group-item-text">Expiration : {{ document.expiration_date|date:'d/m/Y' }}</p>
+                    {% endif %}
                 </a>
                 <br/>
             {% endfor %}
