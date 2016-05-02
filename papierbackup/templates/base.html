@@ -25,6 +25,7 @@
             <div id="navbar" class="navbar-collapse collapse">
                 {% if user.is_authenticated %}
                     <a class="navbar-brand pull-right" href="{% url 'logout' %}">Déconnexion</a>
+                    <a class="navbar-brand pull-right" href="{% url 'document-list' %}">Mes documents</a>
                 {% else %}
                     {% if auth_form %}
                         <form class="navbar-form navbar-right" action="{% url 'login' %}" method="POST">
