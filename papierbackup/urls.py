@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', IndexView.as_view(), name='index'),
     url(r'^login', auth_views.login, {'authentication_form': CustomAuthenticationForm}, name='login'),
+    url(r'^logout', auth_views.logout, name='logout', kwargs={'next_page': '/'}),
     url(r'^documents/', include('documents.url')),
 ]
