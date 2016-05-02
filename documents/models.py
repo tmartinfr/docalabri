@@ -9,7 +9,7 @@ from django.utils.encoding import python_2_unicode_compatible
 @python_2_unicode_compatible
 class Document(models.Model):
     name = models.CharField(max_length=200)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     expiration_date = models.DateField('expiration date', null=True, blank=True)
     creation_date = models.DateTimeField('creation date', auto_now_add=True)
     modification_date = models.DateTimeField('creation date', auto_now=True)
