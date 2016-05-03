@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from datetime import datetime, timedelta
+from uuid import uuid4
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -26,9 +27,11 @@ class Document(models.Model):
             return True
         return False
 
-
+# Do not change this function name, it could impact migrations.
 def user_directory_path(instance, filename):
-    return 'documents/user_{0}/{1}'.format(instance.document.user.id, filename)
+    uuid = uuid4()
+    ext = filename.split('.')[-1]
+    return 'documents/user_{0}/{1}.{2}'.format(instance.document.user.id, uuid, ext)
 
 @python_2_unicode_compatible
 class File(models.Model):
