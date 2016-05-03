@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>{{ object.name }}</h2>
+    <h2>{{ object.name }}</h2>
+    <p>
+    {% if object.expiration_date %}
+    Date d'expiration : {{ object.expiration_date|date:'d/m/Y' }}
+    {% else %}
+    Date d'expiration non définie.
+    {% endif %}
+    </p>
 {% endblock %}
