@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 
+from datetime import datetime, timedelta
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
@@ -17,6 +19,13 @@ class Document(models.Model):
 
     def __str__(self):
         return self.name
+
+    # Returns True if document expires in less than one month.
+    def expire_soon(self):
+        if self.expiration_date < datetime.now().date() + timedelta(30):
+            return True
+        return False
+
 
 def user_directory_path(instance, filename):
     return 'documents/user_{0}/{1}'.format(instance.document.user.id, filename)

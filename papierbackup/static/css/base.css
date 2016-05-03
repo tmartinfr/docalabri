@@ -1,3 +1,4 @@
-p.alert {
-    color: red;
+p.user_alert {
+    color: #d43f3a;
+    font-weight: bold;
 }
