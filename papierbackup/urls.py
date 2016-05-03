@@ -13,15 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.views.static import serve
 
 from papierbackup.views import IndexView
 from papierbackup.forms import CustomAuthenticationForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^uploads/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     url(r'^$', IndexView.as_view(), name='index'),
     url(r'^login', auth_views.login,
         {'authentication_form': CustomAuthenticationForm, 'template_name': 'papierbackup/login.html'}, name='login'),
