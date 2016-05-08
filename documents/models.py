@@ -24,7 +24,7 @@ class Category(models.Model):
 class Document(models.Model):
     name = models.CharField(max_length=200)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ManyToManyField(Category)
+    category = models.ForeignKey(Category)
     expiration_date = models.DateField('expiration date', null=True, blank=True)
     creation_date = models.DateTimeField('creation date', auto_now_add=True)
     modification_date = models.DateTimeField('creation date', auto_now=True)
