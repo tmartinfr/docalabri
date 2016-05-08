@@ -126,6 +126,7 @@ MEDIA_URL = '/uploads/'
 
 
 # Login process
+LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/documents/'
 
 try:
