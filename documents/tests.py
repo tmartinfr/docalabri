@@ -1,7 +1,9 @@
 from datetime import datetime, timedelta
 
 from django.test import TestCase
+from django.core.urlresolvers import reverse
 
+from papierbackup import settings
 from .models import Document
 
 # Create your tests here.
@@ -19,3 +21,19 @@ class DocumentTests(TestCase):
         far_date = datetime.now().date() + timedelta(31)
         document = Document(expiration_date=far_date)
         self.assertEqual(document.expire_soon(), False)
+
+class DocumentViewTests(TestCase):
+
+    def test_document_list_without_auth_redirect_to_login(self):
+        document_list_url = reverse('document-list')
+        response = self.client.get(document_list_url)
+        self.assertEqual(response.status_code, 302)
+        expected_url = '{}?next={}'.format(settings.LOGIN_URL, document_list_url)
+        self.assertEqual(response.url, expected_url)
+
+    def test_document_detail_without_auth_redirect_to_login(self):
+        document_detail_url = reverse('document-detail', args=[42])
+        response = self.client.get(document_detail_url)
+        self.assertEqual(response.status_code, 302)
+        expected_url = '{}?next={}'.format(settings.LOGIN_URL, document_detail_url)
+        self.assertEqual(response.url, expected_url)
