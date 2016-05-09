@@ -45,7 +45,7 @@ class DocumentViewTests(TestCase):
         # Create two users
         user_bob = User.objects.create_user('bob')
         user_bob.save()
-        user_roger = User.objects.create_user('roger', password='totototo')
+        user_roger = User.objects.create_user('roger')
         user_roger.save()
         # Create document owned by bob
         cat = Category(name='Passeport')
@@ -53,6 +53,6 @@ class DocumentViewTests(TestCase):
         doc = Document(user=user_bob, category=cat)
         doc.save()
         # Roger must not be able to read it
-        self.client.login(username='roger', password='totototo')
+        self.client.force_login(user_roger)
         res = self.client.get(reverse('document-detail', args=[doc.pk]))
         self.assertEqual(res.status_code, 404)
