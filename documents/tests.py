@@ -1,10 +1,12 @@
 from datetime import datetime, timedelta
 
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
 from papierbackup import settings
-from .models import Document
+from .models import Document, Category
+
 
 # Create your tests here.
 
@@ -37,3 +39,20 @@ class DocumentViewTests(TestCase):
         self.assertEqual(response.status_code, 302)
         expected_url = '{}?next={}'.format(settings.LOGIN_URL, document_detail_url)
         self.assertEqual(response.url, expected_url)
+
+    def test_document_detail_non_readable_by_non_owner(self):
+        """Ensure it's not possible for an user to access document owned by other users."""
+        # Create two users
+        user_bob = User.objects.create_user('bob')
+        user_bob.save()
+        user_roger = User.objects.create_user('roger', password='totototo')
+        user_roger.save()
+        # Create document owned by bob
+        cat = Category(name='Passeport')
+        cat.save()
+        doc = Document(user=user_bob, category=cat)
+        doc.save()
+        # Roger must not be able to read it
+        self.client.login(username='roger', password='totototo')
+        res = self.client.get(reverse('document-detail', args=[doc.pk]))
+        self.assertEqual(res.status_code, 404)
