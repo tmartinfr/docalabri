@@ -49,6 +49,7 @@ def user_directory_path(instance, filename):
     ext = path.splitext(filename)[1]
     return 'documents/user_{0}/{1}{2}'.format(instance.document.user.id, uuid, ext)
 
+
 @python_2_unicode_compatible
 class File(models.Model):
     document = models.ForeignKey(Document, on_delete=models.CASCADE)
