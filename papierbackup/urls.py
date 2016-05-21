@@ -19,13 +19,14 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.static import serve
 
-from papierbackup.views import IndexView
+from papierbackup.views import IndexView, SubscribeView
 from papierbackup.forms import CustomAuthenticationForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^uploads/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     url(r'^$', IndexView.as_view(), name='index'),
+    url(r'^subscribe$', SubscribeView.as_view(), name='subscribe'),
     url(r'^login', auth_views.login,
         {'authentication_form': CustomAuthenticationForm, 'template_name': 'papierbackup/login.html'}, name='login'),
     url(r'^logout', auth_views.logout, name='logout', kwargs={'next_page': '/'}),

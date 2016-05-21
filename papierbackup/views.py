@@ -10,3 +10,6 @@ class IndexView(TemplateView):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['auth_form'] = CustomAuthenticationForm()
         return context
+
+class SubscribeView(FormView):
+    pass
