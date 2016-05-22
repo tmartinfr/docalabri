@@ -3,27 +3,40 @@
 {% block content %}
     <div class="jumbotron">
         <h1>Vos documents. A l'abri.</h1>
-        <p class="lead">Papiers d'identité, diplômes, factures, feuilles de paie. Gardez-les à vie dans un endroit sûr.</p>
+        <p class="lead">Papiers d'identité, diplômes, factures, feuilles de paie. Gardez-les à vie dans un endroit
+            sûr.</p>
         <p><a class="btn btn-lg btn-success" href="{% url 'contact' %}" role="button">Souscrire</a></p>
     </div>
 
     <div class="row marketing">
         <div class="col-lg-6">
             <h4>Initiative</h4>
-            <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+            <p>Docalabri fournit un service de stockage pour vos documents les plus importants. Pour le moment l'accès au service
+                est limité à certaines associations à caractères sociales. L'ouverture aux particuliers est envisagée à
+                l'avenir.</p>
 
             <h4>Comment ça marche ?</h4>
-            <p>Stocker vos fichiers. Vous ne savez pas quoi ? Nous vous le suggérerons.</p>
+            <p>Docalabri vous suggère une liste de documents importants que vous pouvez stocker chez nous. Vous devez
+                disposer d'une copie numérique ou photo du document en question. Vous pouvez alors le transférer en deux
+                clics de votre ordinateur vers Docalabri.</p>
 
-            <h4>Pourquoi ?</h4>
-            <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet
-                fermentum.</p>
-
-            <h4>Qui sommes nous ?</h4>
-            <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
         </div>
 
         <div class="col-lg-6">
+            <h4>Pourquoi ?</h4>
+            <p>Certains documents doivent être conservés à vie, même en cas de perte de l'original (perte,
+                vol, incendie de votre domicile, etc). Il s'agit par exemple de vos diplômes d'enseignement qui
+                peuvent vous être demandés pour l'accès à un emploi, ou de vos feuilles de paie nécessaires pour
+                l'ouverture de vos droits à la retraite. Ou alors vous partez en voyage et voulez conserver une
+                copie accessible de vos papiers d'identité en cas de besoin.</p>
+
+            <h4>Qui sommes nous ?</h4>
+            <p>Docalabri est un service conçu et hébergé par <a href="http://oopss.org">Oopss.org</a>, une association
+                loi 1901 dont les membres sont des professionnels de l'informatique.</p>
+        </div>
+
+
+        {% comment %}
             <h4>La sécurité est notre priorité</h4>
             <p>Données répliquées sur plusieurs sites géographiques.</p>
 
@@ -36,6 +49,6 @@
             <h4>Logiciels libres</h4>
             <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet
                 fermentum.</p>
-        </div>
+        {% endcomment %}
     </div>
 {% endblock %}
