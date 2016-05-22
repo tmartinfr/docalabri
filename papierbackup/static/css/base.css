@@ -2,3 +2,12 @@ p.user_alert {
     color: #d43f3a;
     font-weight: bold;
 }
+
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+
+p.bg-info {
+    padding: 10px;
+}
