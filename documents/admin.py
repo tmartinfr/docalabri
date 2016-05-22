@@ -1,13 +1,18 @@
 from django.contrib import admin
 
+from documents.forms import FileForm
 from .models import Category, Document, File
 
 class FileInLine(admin.StackedInline):
     model = File
 
+
 class DocumentAdmin(admin.ModelAdmin):
     inlines = [FileInLine]
 
+class FileAdmin(admin.ModelAdmin):
+    form = FileForm
+
 admin.site.register(Category)
 admin.site.register(Document, DocumentAdmin)
-admin.site.register(File)
+admin.site.register(File, FileAdmin)
