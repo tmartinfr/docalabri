@@ -1,7 +1,9 @@
-
+from django.core.urlresolvers import reverse_lazy
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView
 
-from papierbackup.forms import CustomAuthenticationForm
+from papierbackup.forms import CustomAuthenticationForm, ContactForm
+
 
 class IndexView(TemplateView):
     template_name = "papierbackup/index.html"
@@ -11,5 +13,7 @@ class IndexView(TemplateView):
         context['auth_form'] = CustomAuthenticationForm()
         return context
 
-class SubscribeView(FormView):
-    pass
+class ContactView(CreateView):
+    form_class = ContactForm
+    template_name = 'papierbackup/contact.html'
+    success_url = reverse_lazy('contact-ok')

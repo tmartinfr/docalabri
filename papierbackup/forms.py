@@ -1,5 +1,9 @@
 
 from django.contrib.auth.forms import AuthenticationForm
+from django.forms import ModelForm
+
+from papierbackup.models import Contact
+
 
 class CustomAuthenticationForm(AuthenticationForm):
 
@@ -12,3 +16,8 @@ class CustomAuthenticationForm(AuthenticationForm):
         self.fields['password'].label = "Mot de passe"
         # Remove semicolon after fields name
         self.label_suffix = ''
+
+class ContactForm(ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['email']

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p>
+        L'accès au service est pour l'instant limité aux associations à caractère social.
+        Si vous souhaitez être informé de l'évolution du projet et de son ouverture potentielle
+        aux particuliers, saisissez votre adresse e-mail ci-dessous (aucun spam, promis).
+    </p>
+    {% if form.errors %}
+        <ul>
+            {% for error in form.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input type="submit" value="OK"/>
+    </form>
+{% endblock %}
+
