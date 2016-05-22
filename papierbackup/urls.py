@@ -17,16 +17,18 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.views.generic import TemplateView
 from django.views.static import serve
 
-from papierbackup.views import IndexView, SubscribeView
+from papierbackup.views import IndexView, ContactView
 from papierbackup.forms import CustomAuthenticationForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^uploads/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     url(r'^$', IndexView.as_view(), name='index'),
-    url(r'^subscribe$', SubscribeView.as_view(), name='subscribe'),
+    url(r'^contact$', ContactView.as_view(), name='contact'),
+    url(r'^contact/ok$', TemplateView.as_view(template_name='papierbackup/contact_ok.html'), name='contact-ok'),
     url(r'^login', auth_views.login,
         {'authentication_form': CustomAuthenticationForm, 'template_name': 'papierbackup/login.html'}, name='login'),
     url(r'^logout', auth_views.logout, name='logout', kwargs={'next_page': '/'}),
