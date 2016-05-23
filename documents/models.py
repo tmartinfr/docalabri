@@ -43,7 +43,7 @@ class Document(models.Model):
 def user_directory_path(instance, filename):
     uuid = uuid4()
     ext = path.splitext(filename)[1]
-    return 'documents/user_{0}/{1}.{2}'.format(instance.document.user.id, uuid, ext)
+    return 'documents/user_{0}/{1}{2}'.format(instance.document.user.id, uuid, ext)
 
 @python_2_unicode_compatible
 class File(models.Model):
