@@ -52,7 +52,6 @@ class File(models.Model):
     creation_date = models.DateTimeField('creation date', auto_now_add=True)
     # According to RFC6838, MIME-types are 255 caracters max.
     # http://tools.ietf.org/html/rfc6838#section-4.2
-    mime = models.CharField(max_length=255, editable=False)
 
     def __str__(self):
         return self.file.name
