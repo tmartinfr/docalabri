@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
-from documents.models import Document
+from .models import Document
 
 class DocumentListView(LoginRequiredMixin, ListView):
     model = Document

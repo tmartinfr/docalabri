@@ -9,7 +9,7 @@ from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 import magic
 
-from documents.models import File
+from .models import File
 
 
 class FileForm(ModelForm):

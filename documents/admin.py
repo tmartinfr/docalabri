@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from documents.forms import FileForm
+from .forms import FileForm
 from .models import Category, Document, File
 
 class FileInLine(admin.StackedInline):

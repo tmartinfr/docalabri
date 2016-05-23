@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from documents.views import DocumentListView, DocumentDetailView
+from .views import DocumentListView, DocumentDetailView
 
 urlpatterns = [
     url(r'^$', DocumentListView.as_view(), name='document-list'),
