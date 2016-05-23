@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 
-from papierbackup.forms import CustomAuthenticationForm, ContactForm
+from .forms import CustomAuthenticationForm, ContactForm
 
 
 class IndexView(TemplateView):

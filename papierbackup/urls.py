@@ -20,8 +20,8 @@ from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 from django.views.static import serve
 
-from papierbackup.views import IndexView, ContactView
-from papierbackup.forms import CustomAuthenticationForm
+from .views import IndexView, ContactView
+from .forms import CustomAuthenticationForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

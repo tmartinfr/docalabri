@@ -2,7 +2,7 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms import ModelForm
 
-from papierbackup.models import Contact
+from .models import Contact
 
 
 class CustomAuthenticationForm(AuthenticationForm):
