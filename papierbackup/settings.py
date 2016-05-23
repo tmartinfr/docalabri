@@ -122,8 +122,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
-MEDIA_URL = '/uploads/'
 
+# File upload
+MEDIA_URL = '/uploads/'
+FILE_ALLOWED_EXT = ('.jpeg', '.jpg', '.gif', '.png', '.pdf')
 
 # Login process
 LOGIN_URL = '/login'
