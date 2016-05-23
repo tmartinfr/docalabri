@@ -1,4 +1,4 @@
-"""papierbackup URL Configuration
+"""docalabri URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.9/topics/http/urls/
@@ -28,9 +28,9 @@ urlpatterns = [
     url(r'^uploads/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     url(r'^$', IndexView.as_view(), name='index'),
     url(r'^contact$', ContactView.as_view(), name='contact'),
-    url(r'^contact/ok$', TemplateView.as_view(template_name='papierbackup/contact_ok.html'), name='contact-ok'),
+    url(r'^contact/ok$', TemplateView.as_view(template_name='docalabri/contact_ok.html'), name='contact-ok'),
     url(r'^login', auth_views.login,
-        {'authentication_form': CustomAuthenticationForm, 'template_name': 'papierbackup/login.html'}, name='login'),
+        {'authentication_form': CustomAuthenticationForm, 'template_name': 'docalabri/login.html'}, name='login'),
     url(r'^logout', auth_views.logout, name='logout', kwargs={'next_page': '/'}),
     url(r'^documents/', include('documents.url')),
 ]

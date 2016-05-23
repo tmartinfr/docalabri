@@ -6,7 +6,7 @@ from .forms import CustomAuthenticationForm, ContactForm
 
 
 class IndexView(TemplateView):
-    template_name = "papierbackup/index.html"
+    template_name = "docalabri/index.html"
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
@@ -15,5 +15,5 @@ class IndexView(TemplateView):
 
 class ContactView(CreateView):
     form_class = ContactForm
-    template_name = 'papierbackup/contact.html'
+    template_name = 'docalabri/contact.html'
     success_url = reverse_lazy('contact-ok')

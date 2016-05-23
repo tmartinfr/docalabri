@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('papierbackup', '0002_contact_creation_date'),
+        ('docalabri', '0002_contact_creation_date'),
     ]
 
     operations = [

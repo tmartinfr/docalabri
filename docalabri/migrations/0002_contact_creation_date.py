@@ -10,7 +10,7 @@ from django.utils.timezone import utc
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('papierbackup', '0001_initial'),
+        ('docalabri', '0001_initial'),
     ]
 
     operations = [

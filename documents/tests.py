@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
-from papierbackup import settings
+from docalabri import settings
 from .models import Document, Category
 
 
