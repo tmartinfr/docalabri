@@ -125,6 +125,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 # File upload
 MEDIA_URL = '/uploads/'
+# Before adding a new extension, please check preview is supported in documents/templatetags/documents_tags.py
 FILE_ALLOWED_EXT = ('.jpeg', '.jpg', '.gif', '.png', '.pdf')
 
 # Login process
