@@ -6,13 +6,17 @@ import mimetypes
 from django import forms
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm
+
+import logging
 import magic
 
 from .models import File
 
 
-class FileForm(ModelForm):
+logger = logging.getLogger(__name__)
+
+
+class FileForm(forms.ModelForm):
     class Meta:
         model = File
         fields = ['document', 'file']
@@ -20,11 +24,17 @@ class FileForm(ModelForm):
     def clean_file(self):
         _uploaded_file_name = self.cleaned_data['file'].name
         _ext = path.splitext(_uploaded_file_name)[1]
-        _mimetype = magic.from_buffer(self.cleaned_data['file'].file.read(1024), mime=True)
-        _expected_mimetype = mimetypes.guess_type(_uploaded_file_name)[0]
+        try:
+            _mimetype = magic.from_buffer(self.cleaned_data['file'].file.read(1024), mime=True)
+        except magic.MagicException as e:
+            logger.error(e)
+            raise ValidationError(
+                'Une erreur est survenue lors du traitement du fichier téléversé!'
+            )
 
+        _expected_mimetype = mimetypes.guess_type(_uploaded_file_name)[0]
         if (_ext):
-            if not (_ext in settings.FILE_ALLOWED_EXT):
+            if _ext.lower() not in settings.FILE_ALLOWED_EXT:
                 raise ValidationError(
                     '''L'extension de fichier {} n'est pas autorisée \
                     (sont autorisés : {})'''.format(_ext, ', '.join(settings.FILE_ALLOWED_EXT)))
