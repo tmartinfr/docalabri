@@ -40,7 +40,7 @@ class Document(models.Model):
         return False
 
     class Meta:
-        ordering = ['modification_date', 'creation_date']
+        ordering = ['-modification_date', '-creation_date']
 
 
 # Do not change this function name, it could impact migrations.
