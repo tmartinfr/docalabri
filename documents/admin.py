@@ -5,6 +5,7 @@ from .models import Category, Document, File
 
 class FileInLine(admin.StackedInline):
     model = File
+    form = FileForm
 
 
 class DocumentAdmin(admin.ModelAdmin):
