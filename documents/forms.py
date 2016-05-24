@@ -22,6 +22,7 @@ class FileForm(forms.ModelForm):
         fields = ['document', 'file']
 
     def clean_file(self):
+        self.cleaned_data['file'].name = self.cleaned_data['file'].name.lower()
         _uploaded_file_name = self.cleaned_data['file'].name
         _ext = path.splitext(_uploaded_file_name)[1]
         try:
@@ -29,7 +30,7 @@ class FileForm(forms.ModelForm):
         except magic.MagicException as e:
             logger.error(e)
             raise ValidationError(
-                'Une erreur est survenue lors du traitement du fichier téléversé!'
+                'Une erreur est survenue lors du traitement du fichier téléversé !'
             )
 
         _expected_mimetype = mimetypes.guess_type(_uploaded_file_name)[0]
