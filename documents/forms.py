@@ -33,10 +33,13 @@ class FileForm(forms.ModelForm):
         _expected_mimetype = mimetypes.guess_type(_uploaded_file_name)[0]
         if (_ext):
             if _ext not in settings.FILE_ALLOWED_EXT:
+                logger.info('Trying to upload file with unauthorized extension: {}'.format(_ext))
                 raise ValidationError(
                     '''L'extension de fichier {} n'est pas autorisée \
                     (sont autorisés : {})'''.format(_ext, ', '.join(settings.FILE_ALLOWED_EXT)))
             if _mimetype != _expected_mimetype:
+                logger.info(
+                    'Trying to upload file ({}) with invalid content for this extension'.format(_uploaded_file_name))
                 raise ValidationError('{} ne semble pas être un fichier {} valide'.format(_uploaded_file_name, _ext))
 
         else:
