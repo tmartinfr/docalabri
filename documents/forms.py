@@ -28,11 +28,8 @@ class FileForm(forms.ModelForm):
         try:
             _mimetype = magic.from_buffer(self.cleaned_data['file'].file.read(1024), mime=True)
         except magic.MagicException as e:
-            logger.error(e)
-            raise ValidationError(
-                'Une erreur est survenue lors du traitement du fichier téléversé !'
-            )
-
+            logger.error('Unexpected python-magic failure: {}'.format(e))
+            raise ValidationError('Une erreur est survenue lors du traitement du fichier téléversé !')
         _expected_mimetype = mimetypes.guess_type(_uploaded_file_name)[0]
         if (_ext):
             if _ext not in settings.FILE_ALLOWED_EXT:
