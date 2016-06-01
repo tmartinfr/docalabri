@@ -39,11 +39,16 @@ class Document(models.Model):
             return True
         return False
 
+    class Meta:
+        ordering = ['-modification_date', '-creation_date']
+
+
 # Do not change this function name, it could impact migrations.
 def user_directory_path(instance, filename):
     uuid = uuid4()
     ext = path.splitext(filename)[1]
     return 'documents/user_{0}/{1}{2}'.format(instance.document.user.id, uuid, ext)
+
 
 @python_2_unicode_compatible
 class File(models.Model):
@@ -52,6 +57,9 @@ class File(models.Model):
     creation_date = models.DateTimeField('creation date', auto_now_add=True)
     # According to RFC6838, MIME-types are 255 caracters max.
     # http://tools.ietf.org/html/rfc6838#section-4.2
+
+    class Meta:
+        ordering = ['creation_date']
 
     def __str__(self):
         return self.file.name
