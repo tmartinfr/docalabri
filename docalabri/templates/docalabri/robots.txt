@@ -1,0 +1,3 @@
+{% if debug %}User-agent: *
+Disallow: /
+{% endif %}

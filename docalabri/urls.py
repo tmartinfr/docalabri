@@ -20,11 +20,12 @@ from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 from django.views.static import serve
 
-from .views import IndexView, ContactView
+from .views import IndexView, ContactView, RobotsView
 from .forms import CustomAuthenticationForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^robots.txt$', RobotsView.as_view()),
     url(r'^uploads/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     url(r'^$', IndexView.as_view(), name='index'),
     url(r'^contact$', ContactView.as_view(), name='contact'),
