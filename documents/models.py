@@ -1,14 +1,15 @@
 from __future__ import unicode_literals
 
+import os
 from datetime import datetime, timedelta
-from os import path
 from uuid import uuid4
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.text import slugify
 
-# Create your models here.
 
 @python_2_unicode_compatible
 class Category(models.Model):
@@ -47,9 +48,13 @@ class Document(models.Model):
 
 # Do not change this function name, it could impact migrations.
 def user_directory_path(instance, filename):
-    uuid = uuid4()
-    ext = path.splitext(filename)[1]
-    return 'documents/user_{0}/{1}{2}'.format(instance.document.user.id, uuid, ext)
+    ext = os.path.splitext(filename)[1]
+    return 'documents/user_{}/{}/{}{}'.format(
+        instance.document.user.id,
+        instance.document.id,
+        uuid4(),
+        ext.lower()
+    )
 
 
 @python_2_unicode_compatible
@@ -65,3 +70,25 @@ class File(models.Model):
 
     def __str__(self):
         return self.file.name
+
+    def _get_url(self, download=True):
+        if getattr(settings, 'RESTRICTED_DOCUMENT_ENABLED', False):
+            if download:
+                base_url = settings.RESTRICTED_DOCUMENT_URL
+            else:
+                base_url = settings.RESTRICTED_DOCUMENT_PREVIEW_URL
+
+            #TODO(swann): display unique file id per document instead of uuid.
+            filename = self.file.url.split('/')[-1]
+            name = "{}-{}".format(slugify(self.document), filename)
+
+            return '/'.join([base_url, str(self.document.id),
+                             str(self.id), name])
+        else:
+            return self.file.url
+
+    def get_preview_url(self):
+        return self._get_url(download=False)
+
+    def get_download_url(self):
+        return self._get_url()

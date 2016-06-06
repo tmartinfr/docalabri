@@ -111,14 +111,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-
-STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
-
-# File upload
-MEDIA_URL = '/uploads/'
 # Before adding a new extension, please check preview is supported in documents/templatetags/documents_tags.py
 FILE_ALLOWED_EXT = ('.jpeg', '.jpg', '.gif', '.png', '.pdf')
 
@@ -160,6 +152,33 @@ LOGGING = {
         },
     },
 }
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Uploaded files
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/uploads/'
+
+# RESTRICTED_DOCUMENT_ENABLED enables access restriction by user for documents.
+# This is based on Nginx X-Accel-Redirect feature. Nginx must be configured to
+# serve files stored in MEDIA_ROOT directory.
+# If disabled and DEBUG=True, the default Django behavior is preserved to serve
+# uploaded files, mapping the 'MEDIA_URL + file path' to 'MEDIA_ROOT + file
+# path'.
+# If enabled, the MEDIA_URL is ignored to server uploaded files.
+RESTRICTED_DOCUMENT_ENABLED = False
+# RESTRICTED_DOCUMENT_URL is the URL prefix used to provide document
+# urls to users.
+# It's important that these URL reache the document.views default configuration
+RESTRICTED_DOCUMENT_URL = '/documents/download'
+RESTRICTED_DOCUMENT_PREVIEW_URL = '/documents/preview'
+# PRIVATE_URL is a Nginx 'internal' location
+# The trailling slash is important!
+PRIVATE_URL = '/private/'
 
 try:
     from local_settings import *
