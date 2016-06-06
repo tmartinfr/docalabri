@@ -20,18 +20,20 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 @python_2_unicode_compatible
 class Document(models.Model):
-    name = models.CharField(max_length=200, blank=True, editable=False)
+    name = models.CharField(max_length=255, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category)
     expiration_date = models.DateField('expiration date', null=True, blank=True)
     creation_date = models.DateTimeField('creation date', auto_now_add=True)
     modification_date = models.DateTimeField('creation date', auto_now=True)
-    #TODO: tags
 
     def __str__(self):
-        return "{} de {}".format(self.category.name, self.user.username)
+        if self.name:
+            return "{} - {}".format(self.category.name, self.name)
+        return self.category.name
 
     # Returns True if document expires in less than one month.
     def expire_soon(self):
