@@ -32,7 +32,7 @@ class DocumentDetailView(LoginRequiredMixin, DetailView):
         return Document.objects.filter(user=self.request.user)
 
 
-class FileBaseDownload():
+class FileBaseDownload(LoginRequiredMixin, View):
     def _get(self, request, doc_id, file_id, slug, download=True):
         doc = Document.objects.get(user=self.request.user, pk=doc_id)
         if not doc:
@@ -65,7 +65,7 @@ class FileBaseDownload():
         return response
 
 
-class FilePreview(LoginRequiredMixin, View, FileBaseDownload):
+class FilePreview(FileBaseDownload):
     """ This view interacts with Nginx to serve files efficiently
         by using x-accel-redirect feature.
     """
@@ -74,7 +74,7 @@ class FilePreview(LoginRequiredMixin, View, FileBaseDownload):
         return self._get(request, doc_id, file_id, slug, False)
 
 
-class FileDownload(LoginRequiredMixin, View, FileBaseDownload):
+class FileDownload(FileBaseDownload):
     """ This view interacts with Nginx to serve files efficiently
         by using x-accel-redirect feature.
 
