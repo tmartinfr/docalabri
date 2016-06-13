@@ -53,7 +53,7 @@ def user_directory_path(instance, filename):
         instance.document.user.id,
         instance.document.id,
         uuid4(),
-        ext.lower()
+        ext
     )
 
 
