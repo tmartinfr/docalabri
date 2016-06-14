@@ -38,7 +38,7 @@ class FileBaseDownload(View):
         try:
             f = File.objects.select_related('document').get(pk=file_id, document__user=request.user)
         except ObjectDoesNotExist:
-            logger.warning("Unauthorized access by user {} to [file:%s]".format(request.user, file_id))
+            logger.warning("Unauthorized access by user {} to [file:{}]".format(request.user, file_id))
             return HttpResponseForbidden()
 
         logger.debug("Accessing [file:%s]" % (f))
