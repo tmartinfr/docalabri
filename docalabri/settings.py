@@ -171,11 +171,6 @@ MEDIA_URL = '/uploads/'
 # path'.
 # If enabled, the MEDIA_URL is ignored to server uploaded files.
 RESTRICTED_DOCUMENT_ENABLED = False
-# RESTRICTED_DOCUMENT_URL is the URL prefix used to provide document
-# urls to users.
-# It's important that these URL reache the document.views default configuration
-RESTRICTED_DOCUMENT_URL = '/documents/download'
-RESTRICTED_DOCUMENT_PREVIEW_URL = '/documents/preview'
 # PRIVATE_URL is a Nginx 'internal' location
 # The trailling slash is important!
 PRIVATE_URL = '/private/'

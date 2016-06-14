@@ -6,6 +6,7 @@ from uuid import uuid4
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.text import slugify
@@ -73,17 +74,15 @@ class File(models.Model):
 
     def _get_url(self, download=True):
         if getattr(settings, 'RESTRICTED_DOCUMENT_ENABLED', False):
-            if download:
-                base_url = settings.RESTRICTED_DOCUMENT_URL
-            else:
-                base_url = settings.RESTRICTED_DOCUMENT_PREVIEW_URL
-
             #TODO(swann): display unique file id per document instead of uuid.
             filename = self.file.url.split('/')[-1]
             name = "{}-{}".format(slugify(self.document), filename)
+            reverse_args = [str(self.document.id), str(self.id), name]
 
-            return '/'.join([base_url, str(self.document.id),
-                             str(self.id), name])
+            if download:
+                return reverse('document-download', args=reverse_args)
+            else:
+                return reverse('document-preview', args=reverse_args)
         else:
             return self.file.url
 
