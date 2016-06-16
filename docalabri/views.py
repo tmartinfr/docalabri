@@ -15,6 +15,7 @@ class RobotsView(TemplateView):
         context['debug'] = settings.DEBUG
         return context
 
+
 class IndexView(TemplateView):
     template_name = "docalabri/index.html"
 
@@ -22,6 +23,7 @@ class IndexView(TemplateView):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['auth_form'] = CustomAuthenticationForm()
         return context
+
 
 class ContactView(CreateView):
     form_class = ContactForm

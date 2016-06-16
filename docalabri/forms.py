@@ -17,6 +17,7 @@ class CustomAuthenticationForm(AuthenticationForm):
         # Remove semicolon after fields name
         self.label_suffix = ''
 
+
 class ContactForm(ModelForm):
     class Meta:
         model = Contact

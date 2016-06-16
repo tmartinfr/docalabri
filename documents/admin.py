@@ -18,6 +18,7 @@ class FileAdmin(admin.ModelAdmin):
     model = File
     list_filter = ('document__user__username', 'document__name')
 
+
 class FileAdmin(admin.ModelAdmin):
     form = FileForm
 

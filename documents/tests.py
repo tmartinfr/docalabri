@@ -8,8 +8,6 @@ from docalabri import settings
 from .models import Document, Category
 
 
-# Create your tests here.
-
 class DocumentTests(TestCase):
 
     def test_document_expire_soon_with_soon_date(self):
@@ -23,6 +21,7 @@ class DocumentTests(TestCase):
         far_date = datetime.now().date() + timedelta(31)
         document = Document(expiration_date=far_date)
         self.assertEqual(document.expire_soon(), False)
+
 
 class DocumentViewTests(TestCase):
 

@@ -74,7 +74,7 @@ class File(models.Model):
 
     def _get_url(self, download=True):
         if getattr(settings, 'RESTRICTED_DOCUMENT_ENABLED', False):
-            #TODO(swann): display unique file id per document instead of uuid.
+            # TODO(swann): display unique file id per document instead of uuid.
             filename = self.file.url.split('/')[-1]
             name = "{}-{}".format(slugify(self.document), filename)
             reverse_args = [str(self.document.id), str(self.id), name]
