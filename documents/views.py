@@ -31,7 +31,7 @@ class DocumentDetailView(LoginRequiredMixin, DetailView):
 
 
 class FileBaseDownload(View):
-    def _get(self, request, doc_id, file_id, slug, download=True):
+    def _get(self, request, file_id, slug, download=True):
         if not request.user.is_authenticated():
             return HttpResponseForbidden()
 
@@ -61,8 +61,8 @@ class FilePreview(FileBaseDownload):
         by using x-accel-redirect feature.
     """
 
-    def get(self, request, doc_id, file_id, slug):
-        return self._get(request, doc_id, file_id, slug, False)
+    def get(self, request, file_id, slug):
+        return self._get(request, file_id, slug, download=False)
 
 
 class FileDownload(FileBaseDownload):
@@ -71,5 +71,5 @@ class FileDownload(FileBaseDownload):
 
     """
 
-    def get(self, request, doc_id, file_id, slug):
-        return self._get(request, doc_id, file_id, slug)
+    def get(self, request, file_id, slug):
+        return self._get(request, file_id, slug)

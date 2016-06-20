@@ -77,7 +77,7 @@ class File(models.Model):
             # TODO(swann): display unique file id per document instead of uuid.
             filename = self.file.url.split('/')[-1]
             name = "{}-{}".format(slugify(self.document), filename)
-            reverse_args = [str(self.document.id), str(self.id), name]
+            reverse_args = [str(self.id), name]
 
             if download:
                 return reverse('document-download', args=reverse_args)
