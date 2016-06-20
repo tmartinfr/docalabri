@@ -159,20 +159,12 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Uploaded files
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
-MEDIA_URL = '/uploads/'
 
-# RESTRICTED_DOCUMENT_ENABLED enables access restriction by user for documents.
-# This is based on Nginx X-Accel-Redirect feature. Nginx must be configured to
-# serve files stored in MEDIA_ROOT directory.
-# If disabled and DEBUG=True, the default Django behavior is preserved to serve
-# uploaded files, mapping the 'MEDIA_URL + file path' to 'MEDIA_ROOT + file
-# path'.
-# If enabled, the MEDIA_URL is ignored to server uploaded files.
-RESTRICTED_DOCUMENT_ENABLED = False
-# PRIVATE_URL is a Nginx 'internal' location
-# The trailling slash is important!
+# In production (DEBUG=False), files are served using Nginx X-Accel-Redirect feature.
+# PRIVATE_URL should be set to a Nginx location with the 'internal' flag enabled,
+# and an alias to the directory where documents are stored (see MEDIA_ROOT).
+# The trailing slash is important!
 PRIVATE_URL = '/private/'
 
 try:

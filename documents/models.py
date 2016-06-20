@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 
+import mimetypes
+
 import os
 from datetime import datetime, timedelta
 from uuid import uuid4
@@ -77,3 +79,6 @@ class File(models.Model):
         basename = self.file.url.split('/')[-1]
         document_slug = slugify(self.document)
         return "{}-{}".format(document_slug, basename)
+
+    def mimetype(self):
+        return mimetypes.guess_type(self.file.url)[0]
