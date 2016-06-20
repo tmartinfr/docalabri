@@ -14,10 +14,11 @@
     </p>
 
     {% for file in object.file_set.all %}
-        <a href="{{ file.get_download_url }}" class="list-group-item" download>
+        <a href="{% url 'document-download' file.id file.slugname %}" class="list-group-item" download>
             <p class="list-group-item-text">
                 Télécharger ce fichier<br><br>
-                {{ file.get_preview_url|document_preview }}
+                {% url 'document-preview' file.id file.slugname as preview_url %}
+                {{ preview_url|document_preview }}
             </p>
         </a>
         <br>

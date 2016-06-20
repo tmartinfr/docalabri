@@ -72,22 +72,8 @@ class File(models.Model):
     def __str__(self):
         return self.file.name
 
-    def _get_url(self, download=True):
-        if getattr(settings, 'RESTRICTED_DOCUMENT_ENABLED', False):
-            # TODO(swann): display unique file id per document instead of uuid.
-            filename = self.file.url.split('/')[-1]
-            name = "{}-{}".format(slugify(self.document), filename)
-            reverse_args = [str(self.id), name]
-
-            if download:
-                return reverse('document-download', args=reverse_args)
-            else:
-                return reverse('document-preview', args=reverse_args)
-        else:
-            return self.file.url
-
-    def get_preview_url(self):
-        return self._get_url(download=False)
-
-    def get_download_url(self):
-        return self._get_url()
+    def slugname(self):
+        # TODO(swann): display unique file id per document instead of uuid.
+        basename = self.file.url.split('/')[-1]
+        document_slug = slugify(self.document)
+        return "{}-{}".format(document_slug, basename)
