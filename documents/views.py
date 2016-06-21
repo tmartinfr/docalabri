@@ -1,4 +1,4 @@
-
+import os
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
@@ -45,13 +45,14 @@ class FileBaseDownload(View):
         logger.debug("Accessing [file:%s]" % (f))
 
         response = HttpResponse()
+        response['Content-Type'] = f.mimetype
 
         if download:
-            response['Content-Type'] = f.mimetype
             response['Content-Disposition'] = 'attachment; filename={}'.format(f.slugname)
 
         if settings.DEBUG:
-            pass
+            file_location = os.path.join(settings.MEDIA_ROOT, f.file.url)
+            response.write(open(file_location).read())
         else:
             redir = f.file.url.replace(settings.MEDIA_URL, settings.PRIVATE_URL, 1)
             response['X-Accel-Redirect'] = redir

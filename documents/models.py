@@ -74,11 +74,13 @@ class File(models.Model):
     def __str__(self):
         return self.file.name
 
+    @property
     def slugname(self):
         # TODO(swann): display unique file id per document instead of uuid.
         basename = self.file.url.split('/')[-1]
         document_slug = slugify(self.document)
         return "{}-{}".format(document_slug, basename)
 
+    @property
     def mimetype(self):
         return mimetypes.guess_type(self.file.url)[0]
