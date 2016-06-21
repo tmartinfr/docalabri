@@ -34,13 +34,13 @@ class FileBaseDownload(View):
     """
     def _get(self, request, file_id, slug, download=True):
         if not request.user.is_authenticated():
-            return HttpResponseForbidden()
+            return HttpResponseForbidden('File access forbidden for unauthenticated user')
 
         try:
             f = File.objects.select_related('document').get(pk=file_id, document__user=request.user)
         except ObjectDoesNotExist:
             logger.warning("Unauthorized access by user {} to [file:{}]".format(request.user, file_id))
-            return HttpResponseForbidden()
+            return HttpResponseForbidden('File access forbidden for unauthorized user')
 
         logger.debug("Accessing [file:%s]" % (f))
 
