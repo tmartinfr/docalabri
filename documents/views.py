@@ -54,7 +54,7 @@ class FileBaseDownload(View):
             file_location = os.path.join(settings.MEDIA_ROOT, f.file.url)
             response.write(open(file_location).read())
         else:
-            redir = f.file.url.replace(settings.MEDIA_URL, settings.PRIVATE_URL, 1)
+            redir = os.path.join(settings.PRIVATE_URL, f.file.url)
             response['X-Accel-Redirect'] = redir
             logger.debug(response)
 
